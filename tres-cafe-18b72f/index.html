@@ -1,0 +1,1095 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>TRES CAFÉ en Google Maps y ChatGPT</title>
+<meta name="description" content="Revisamos cómo los encuentran turistas y vecinos en Google Maps, ChatGPT, Gemini y Perplexity, qué está fallando y cómo arreglarlo en 30 días.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_MX">
+<meta property="og:url" content="https://emmchulin.github.io/diagnostico-local/tres-cafe-18b72f/">
+<meta property="og:title" content="TRES CAFÉ: no aparecen en «cafetería», «desayunos» ni «breakfast» en Valladolid">
+<meta property="og:description" content="Revisamos cómo los encuentran turistas y vecinos en Google Maps, ChatGPT, Gemini y Perplexity, qué está fallando y cómo arreglarlo en 30 días.">
+<meta property="og:image" content="https://emmchulin.github.io/diagnostico-local/tres-cafe-18b72f/vista.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Onest:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: expediente de visibilidad para una cafetería y panadería de Valladolid. Paleta de café espresso y turquesa de fachada colonial. El color de acento marca siempre "ustedes". */
+:root{
+  --bg:#F2F3F1; --surface:#FFFFFF; --sunk:#E6E8E5; --ink:#1E1C1A; --muted:#5E5B57; --line:#D8D9D5;
+  --pine:#0B6463; --pine-soft:#DCEDEC;
+  --band:#2F221C; --band-ink:#F6EFE9; --band-muted:#C7B3A5;
+  --accent:#0B7A78; --accent-soft:#D8EFEE; --accent-ink:#075B5A; --on-accent:#FFFFFF;
+  --good:#17694A; --good-soft:#DCEFE4; --warn:#875800; --warn-soft:#F6EBD2; --bad:#B12A3C; --bad-soft:#F7DFE2;
+  --h1:#3E2A20; --h1-ink:#FFF6EE; --h2:#8A5E44; --h2-ink:#FFFFFF; --h3:#E5D1C2; --h3-ink:#3E2A20;
+  --seg-maps:#C49A7E; --accent-on-band:#6FD6D2;
+  --map:#E9EBE8; --street:#FFFFFF; --block:#DADDD8;
+  --cup:#F4EDE6; --coffee:#6B4430; --croissant:#E2A65A; --croissant-dark:#B97834;
+  --shadow:0 1px 2px rgba(30,28,26,.06),0 10px 28px rgba(30,28,26,.07);
+  --f-display:"Archivo","Arial Narrow",system-ui,sans-serif;
+  --f-body:"Onest",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121110; --surface:#1B1918; --sunk:#252220; --ink:#EEE9E4; --muted:#A79F98; --line:#35302C;
+    --pine:#6FD6D2; --pine-soft:#132A29;
+    --band:#1F1612; --band-ink:#EEE9E4; --band-muted:#A8968A;
+    --accent:#3FC1BD; --accent-soft:#11302F; --accent-ink:#7BE3DF; --on-accent:#061413;
+    --good:#5FCB97; --good-soft:#142E21; --warn:#E6AE45; --warn-soft:#30260F; --bad:#F2808F; --bad-soft:#3A1B21;
+    --h1:#C08A68; --h1-ink:#170C06; --h2:#6E4A36; --h2-ink:#F4E6DC; --h3:#3A2A21; --h3-ink:#E3C6B2;
+    --seg-maps:#D9B39A; --accent-on-band:#7BE3DF;
+    --map:#252220; --street:#322D2A; --block:#1B1918;
+    --cup:#3A3431; --coffee:#C79A7A; --croissant:#C98E48; --croissant-dark:#8E5B26;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 28px rgba(0,0,0,.3);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121110; --surface:#1B1918; --sunk:#252220; --ink:#EEE9E4; --muted:#A79F98; --line:#35302C;
+  --pine:#6FD6D2; --pine-soft:#132A29;
+  --band:#1F1612; --band-ink:#EEE9E4; --band-muted:#A8968A;
+  --accent:#3FC1BD; --accent-soft:#11302F; --accent-ink:#7BE3DF; --on-accent:#061413;
+  --good:#5FCB97; --good-soft:#142E21; --warn:#E6AE45; --warn-soft:#30260F; --bad:#F2808F; --bad-soft:#3A1B21;
+  --h1:#C08A68; --h1-ink:#170C06; --h2:#6E4A36; --h2-ink:#F4E6DC; --h3:#3A2A21; --h3-ink:#E3C6B2;
+  --seg-maps:#D9B39A; --accent-on-band:#7BE3DF;
+  --map:#252220; --street:#322D2A; --block:#1B1918;
+  --cup:#3A3431; --coffee:#C79A7A; --croissant:#C98E48; --croissant-dark:#8E5B26;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 28px rgba(0,0,0,.3);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{font-family:var(--f-display);font-stretch:112%;line-height:1.12;margin:0;text-wrap:balance;letter-spacing:-.01em}
+p{margin:0}
+a{color:var(--pine)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+.num{font-variant-numeric:tabular-nums}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.tiny{font-size:12.5px}
+
+/* Banda de paciente */
+.band{background:var(--band);color:var(--band-ink)}
+.band .wrap{padding-block:28px 30px;display:grid;gap:18px}
+.band .eyebrow{color:var(--band-muted)}
+.topline{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.band .pill{background:rgba(255,255,255,.1);color:var(--band-ink);border:1px solid rgba(255,255,255,.18)}
+.patient{font-size:clamp(30px,5vw,50px);font-stretch:118%;font-weight:800}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px 28px;margin:0}
+.meta div{min-width:0}
+.meta dt{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--band-muted);font-weight:600}
+.meta dd{margin:2px 0 0;font-size:15px}
+
+/* Secciones */
+section{padding-block:56px 8px}
+.sec-head{display:grid;gap:8px;margin-bottom:26px;max-width:760px}
+.sec-head h2{font-size:clamp(24px,3.4vw,34px);font-weight:750}
+.sec-head p{color:var(--muted);font-size:17px}
+.sec-tag{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--pine)}
+.sec-tag::before{content:"";width:18px;height:2px;background:var(--pine);display:inline-block}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:44px;align-items:center;padding-block:52px 8px}
+.rank{display:flex;align-items:flex-end;gap:16px;margin-bottom:18px}
+.rank-num{font-family:var(--f-display);font-stretch:125%;font-weight:800;font-size:clamp(96px,15vw,168px);line-height:.82;color:var(--accent);letter-spacing:-.04em}
+.rank-lbl{font-size:15px;color:var(--muted);max-width:220px;padding-bottom:10px}
+.hero h2{font-size:clamp(26px,3.6vw,38px);font-weight:750;margin-bottom:16px}
+.hero p{font-size:18px;color:var(--muted);max-width:60ch}
+.hero p strong{color:var(--ink)}
+.compare{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.compare .pill{background:var(--surface);border:1px solid var(--line);color:var(--ink);font-size:13.5px;padding:7px 12px}
+.compare .pill b{font-family:var(--f-display);font-stretch:110%}
+
+/* Lista tipo celular (datos reales) */
+.phone{background:var(--surface);border:1px solid var(--line);border-radius:30px;padding:14px;box-shadow:var(--shadow);max-width:380px;width:100%;justify-self:center}
+.phone-screen{border-radius:20px;overflow:hidden;background:var(--bg);border:1px solid var(--line)}
+.ph-search{display:flex;align-items:center;gap:8px;margin:12px;padding:10px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:14px}
+.ph-search svg{flex:none}
+.ph-note{font-size:11.5px;color:var(--muted);padding:0 14px 8px}
+.res{list-style:none;margin:0;padding:0}
+.res li{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 14px;border-top:1px solid var(--line);background:var(--surface)}
+.res .pos{font-family:var(--f-display);font-stretch:110%;font-weight:700;color:var(--muted);font-size:15px;text-align:center}
+.res .nm{font-size:14px;font-weight:600;line-height:1.25;overflow-wrap:anywhere}
+.res .rt{font-size:12.5px;color:var(--muted)}
+.res .star{color:var(--warn)}
+.res li.you{background:var(--accent-soft);box-shadow:inset 4px 0 0 var(--accent)}
+.res li.you .pos{color:var(--accent-ink)}
+.res li.you .nm{color:var(--accent-ink)}
+.you-tag{font-size:11px;font-weight:700;background:var(--accent);color:var(--on-accent);border-radius:999px;padding:3px 8px;white-space:nowrap}
+.res li.fold{display:flex;align-items:center;gap:8px;padding:6px 14px;font-size:11.5px;font-weight:600;color:var(--muted);background:var(--sunk);border-top:1px dashed var(--muted)}
+.cap{font-size:12.5px;color:var(--muted);margin-top:10px;text-align:center}
+
+/* Signos vitales */
+.vitals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:10px;align-content:start;min-width:0}
+.tile .k{font-size:13px;font-weight:600;color:var(--muted)}
+.tile .v{font-family:var(--f-display);font-stretch:118%;font-weight:800;font-size:44px;line-height:1;letter-spacing:-.02em}
+.tile .v small{font-size:18px;color:var(--muted);font-weight:600;letter-spacing:0}
+.tile .d{font-size:14px;color:var(--muted)}
+.tile.lead{background:var(--band);color:var(--band-ink);border-color:transparent}
+.tile.lead .k,.tile.lead .d,.tile.lead .v small{color:var(--band-muted)}
+.stack{display:flex;height:12px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.14)}
+.stack span{display:block;height:100%}
+.legend{display:grid;gap:4px;font-size:12.5px}
+.legend div{display:flex;justify-content:space-between;gap:8px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:baseline}
+.status{display:inline-flex;gap:6px;align-items:center;font-size:12.5px;font-weight:700;padding:3px 9px;border-radius:999px;width:max-content}
+.s-bad{background:var(--bad-soft);color:var(--bad)}
+.s-warn{background:var(--warn-soft);color:var(--warn)}
+.s-good{background:var(--good-soft);color:var(--good)}
+
+/* Mapa de calor */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+table.heat{border-collapse:separate;border-spacing:0;width:100%;min-width:680px;font-size:14.5px}
+.heat th,.heat td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line)}
+.heat thead th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--sunk)}
+.heat thead th.kw{text-align:center;text-transform:none;letter-spacing:0;font-size:13px;color:var(--ink)}
+.heat td.c{text-align:center;width:15%}
+.heat tbody tr:last-child td,.heat tbody tr:last-child th{border-bottom:0}
+.heat th[scope=row]{font-weight:600}
+.heat th[scope=row] .sub{display:block;font-weight:400;font-size:12.5px;color:var(--muted)}
+.cell{display:inline-grid;place-items:center;min-width:44px;height:34px;padding:0 8px;border-radius:9px;font-family:var(--f-display);font-stretch:110%;font-weight:700;font-variant-numeric:tabular-nums}
+.c1{background:var(--h1);color:var(--h1-ink)}
+.c2{background:var(--h2);color:var(--h2-ink)}
+.c3{background:var(--h3);color:var(--h3-ink)}
+.c0{background:var(--sunk);color:var(--muted);font-weight:500}
+tr.you-row th,tr.you-row td{background:var(--accent-soft)}
+tr.you-row th[scope=row]{color:var(--accent-ink);box-shadow:inset 4px 0 0 var(--accent)}
+tr.group td{background:var(--bg);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:8px 14px}
+.heat-key{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:13px;color:var(--muted);align-items:center}
+.heat-key .cell{min-width:30px;height:24px;font-size:12px}
+.callouts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+.callout{border-left:3px solid var(--pine);padding:4px 0 4px 14px;font-size:15px;min-width:0}
+.callout b{display:block;font-family:var(--f-display);font-stretch:112%;font-size:17px;margin-bottom:2px}
+.callout.alert{border-color:var(--accent)}
+
+/* IA */
+.ai-grid{display:grid;grid-template-columns:150px repeat(3,minmax(0,1fr));gap:12px;align-items:stretch}
+.ai-col-h{font-family:var(--f-display);font-stretch:112%;font-weight:700;font-size:16px;padding:0 4px 2px;align-self:end}
+.ai-q{font-size:14px;font-weight:600;color:var(--muted);align-self:center;padding-right:6px}
+.ai-q b{display:block;color:var(--ink);font-size:15px;margin-top:2px}
+.ai{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;gap:10px;align-content:start;min-width:0}
+.ai .who{display:none;font-family:var(--f-display);font-stretch:112%;font-weight:700}
+.ai ol{margin:0;padding-left:20px;font-size:14px;display:grid;gap:3px}
+.ai li.hit{color:var(--accent-ink);font-weight:700}
+.ai li.hit::marker{color:var(--accent-ink)}
+.ai .why{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:8px}
+.ai.miss{background:var(--sunk)}
+.insight{margin-top:22px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:start;background:var(--pine-soft);border-radius:var(--r);padding:20px 22px}
+.insight .big{font-family:var(--f-display);font-stretch:120%;font-weight:800;font-size:40px;line-height:1;color:var(--pine)}
+.insight p{font-size:16.5px}
+.insight p + p{margin-top:8px}
+
+/* Diagnóstico */
+.dx{display:grid;gap:10px}
+.dx-row{display:grid;grid-template-columns:110px minmax(0,1fr) minmax(0,1.1fr);gap:18px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;position:relative;overflow:hidden}
+.dx-row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--sev)}
+.dx-row h3{font-size:17px;font-weight:700;font-stretch:108%}
+.dx-row .ev{font-size:14px;color:var(--muted);margin-top:4px}
+.dx-row .fx{font-size:14.5px}
+.sev-c{--sev:var(--bad)} .sev-a{--sev:var(--warn)} .sev-m{--sev:var(--h2)} .sev-ok{--sev:var(--good)}
+.s-mid{background:var(--pine-soft);color:var(--pine)}
+
+/* Tratamiento */
+.plan{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;counter-reset:wk}
+.wk{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.wk .when{font-family:var(--f-display);font-stretch:118%;font-weight:800;font-size:20px;color:var(--pine)}
+.wk h3{font-size:15.5px;font-weight:700}
+.wk ul{margin:0;padding-left:18px;font-size:14px;display:grid;gap:5px}
+.wk.last{background:var(--band);color:var(--band-ink);border-color:transparent}
+.wk.last .when{color:var(--accent)}
+
+/* Maquetas */
+.mocks{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:28px;align-items:start}
+.mock-label{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.mock-label h3{font-size:18px}
+.ilus{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--warn);background:var(--warn-soft);padding:3px 8px;border-radius:6px}
+.mapbox{height:120px;position:relative;background:
+   linear-gradient(90deg,transparent 46%,var(--street) 46%,var(--street) 52%,transparent 52%),
+   linear-gradient(0deg,transparent 38%,var(--street) 38%,var(--street) 44%,transparent 44%),
+   repeating-linear-gradient(90deg,var(--block) 0 38px,var(--map) 38px 44px),
+   repeating-linear-gradient(0deg,transparent 0 30px,var(--map) 30px 35px);
+   }
+.pin{position:absolute;left:49%;top:41%;transform:translate(-50%,-100%)}
+.sheet{background:var(--surface);padding:14px;display:grid;gap:10px}
+.sheet h4{font-size:17px;font-stretch:108%;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.ver{display:inline-flex;gap:4px;align-items:center;font-family:var(--f-body);font-size:11px;font-weight:700;color:var(--good);background:var(--good-soft);padding:2px 7px;border-radius:999px}
+.sheet .line{font-size:13px;color:var(--muted)}
+.sheet .open{color:var(--good);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:3px 9px;background:var(--bg)}
+.acts{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.acts span{display:grid;justify-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--pine);padding:8px 2px;border-radius:10px;background:var(--pine-soft)}
+.photos{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.ph{aspect-ratio:1;border-radius:10px;display:grid;place-items:center;align-content:center;gap:4px;font-size:10.5px;font-weight:600;max-width:100%;text-align:center}
+.ph svg{width:26px;height:26px}
+.ph1{background:var(--h3);color:var(--h3-ink)} .ph2{background:var(--accent-soft);color:var(--accent-ink)} .ph3{background:var(--warn-soft);color:var(--warn)} .ph4{background:var(--pine-soft);color:var(--pine)}
+.post{border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13px;display:grid;gap:4px}
+.post b{font-size:12px;color:var(--muted);font-weight:600}
+.reply{border-left:3px solid var(--pine);padding-left:10px;font-size:12.5px;color:var(--muted)}
+.reply b{color:var(--ink)}
+
+.browser{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.bar{display:flex;align-items:center;gap:8px;padding:10px 12px;background:var(--sunk);border-bottom:1px solid var(--line)}
+.dots{display:flex;gap:5px}.dots i{width:9px;height:9px;border-radius:50%;background:var(--line);display:block}
+.url{flex:1;min-width:0;font-size:12.5px;color:var(--muted);background:var(--surface);border-radius:999px;padding:4px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lp-hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:16px;align-items:center;padding:24px 22px;background:var(--pine-soft)}
+.lp-hero h4{font-size:clamp(20px,2.4vw,26px);font-weight:800;font-stretch:115%;color:var(--pine)}
+.lp-hero p{font-size:14px;color:var(--muted);margin-top:8px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;border-radius:999px;padding:10px 16px;background:var(--accent);color:var(--on-accent);margin-top:14px;border:0}
+.lp-hero svg.dog{width:100%;max-width:190px;height:auto;justify-self:center}
+.lp-sv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:18px 22px}
+.lp-sv div{border:1px solid var(--line);border-radius:12px;padding:12px;font-size:13px;min-width:0}
+.lp-sv b{display:block;font-size:14px;margin:6px 0 2px}
+.lp-sv svg{width:22px;height:22px;color:var(--pine)}
+.lp-foot{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;padding:12px 22px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+
+/* Calculadora */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.field{display:grid;gap:6px}
+.field + .field{margin-top:16px}
+.field label{font-weight:600;font-size:15px;display:flex;justify-content:space-between;gap:10px}
+.field label output{font-family:var(--f-display);font-stretch:112%;color:var(--pine);font-variant-numeric:tabular-nums}
+.field input[type=range]{width:100%;accent-color:var(--accent)}
+.field .hint{font-size:12.5px;color:var(--muted)}
+.result{background:var(--band);color:var(--band-ink);border-radius:12px;padding:22px;display:grid;gap:14px;align-content:start}
+.result .lbl{font-size:13px;color:var(--band-muted);font-weight:600}
+.result .big{font-family:var(--f-display);font-stretch:120%;font-weight:800;font-size:clamp(34px,5vw,48px);line-height:1;font-variant-numeric:tabular-nums}
+.result .be{font-size:15px;border-top:1px solid rgba(255,255,255,.18);padding-top:12px}
+.result .be b{color:var(--accent)}
+
+/* Oferta */
+.offer{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:22px;align-items:start}
+.price{background:var(--surface);border:2px solid var(--accent);border-radius:18px;padding:26px;display:grid;gap:14px}
+.price .name{font-family:var(--f-display);font-stretch:115%;font-weight:800;font-size:22px}
+.price .amt{font-family:var(--f-display);font-stretch:120%;font-weight:800;font-size:clamp(44px,6vw,60px);line-height:1;font-variant-numeric:tabular-nums}
+.price .amt small{font-size:16px;font-weight:600;color:var(--muted);font-stretch:100%}
+.price .launch{background:var(--accent-soft);color:var(--accent-ink);border-radius:10px;padding:10px 12px;font-size:14.5px}
+.price .launch b{font-family:var(--f-display);font-stretch:115%}
+.price ul{margin:0;padding-left:18px;font-size:14.5px;display:grid;gap:4px}
+.extras{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.extra{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:6px;align-content:start;min-width:0}
+.extra svg{width:24px;height:24px;color:var(--accent-ink)}
+.extra h3{font-size:16px;font-weight:700}
+.extra p{font-size:14px;color:var(--muted)}
+.next{margin-top:22px;display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;justify-content:space-between;background:var(--band);color:var(--band-ink);border-radius:18px;padding:24px 26px}
+.next h3{font-size:clamp(20px,2.6vw,26px);font-weight:800}
+.next p{color:var(--band-muted);margin-top:6px;max-width:60ch}
+
+footer{margin-top:56px;border-top:1px solid var(--line)}
+footer .wrap{padding-block:28px 40px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;font-size:13.5px;color:var(--muted)}
+footer h4{font-size:13px;font-family:var(--f-body);font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
+footer ul{margin:0;padding-left:16px;display:grid;gap:4px}
+
+@media (max-width:960px){
+  .hero{grid-template-columns:1fr;gap:30px}
+  .vitals{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .plan{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mocks,.offer,.calc{grid-template-columns:1fr}
+  .callouts{grid-template-columns:1fr}
+  .ai-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .ai-col-h.sp,.ai-q{grid-column:1/-1}
+  .ai-q{padding-top:10px}
+  footer .wrap{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .vitals,.plan,.extras{grid-template-columns:1fr}
+  .ai-grid{grid-template-columns:1fr}
+  .ai-col-h{display:none}
+  .ai .who{display:block}
+  .dx-row{grid-template-columns:1fr;gap:8px}
+  .lp-hero{grid-template-columns:1fr}
+  .lp-hero svg.dog{max-width:140px;order:-1}
+  .lp-sv{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .insight{grid-template-columns:1fr}
+  .rank{flex-wrap:wrap}
+}
+@media (prefers-reduced-motion:no-preference){
+  .stack span{transition:width .6s ease}
+}
+.wk.locked ul{filter:blur(6px);user-select:none;-webkit-user-select:none;pointer-events:none;opacity:.85}
+.maint{border-top:1px dashed var(--line);padding-top:14px;display:grid;gap:4px}
+.maint .mname{font-weight:700;font-size:15px}
+.maint .mamt{font-family:var(--f-display);font-stretch:118%;font-weight:800;font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--accent-ink)}
+.maint .mamt small{font-family:var(--f-body);font-stretch:100%;font-size:14px;font-weight:600;color:var(--muted)}
+.maint p{font-size:14px;color:var(--muted)}
+.cta{display:grid;gap:8px;justify-items:start}
+.btn.wa{margin-top:0;font-size:16px;padding:14px 22px;text-decoration:none;background:#128C4A;color:#FFFFFF;box-shadow:0 6px 18px rgba(0,0,0,.22)}
+.btn.wa:hover{filter:brightness(1.08)}
+.btn.wa svg{width:20px;height:20px}
+.cta-num{font-size:13.5px;color:var(--band-muted)}
+.cta-num b{color:var(--band-ink);font-variant-numeric:tabular-nums;user-select:all}
+
+/* ===== Arreglos de la auditoría UX/UI (13-nov-2026) ===== */
+/* A2: nada empuja la página más ancha que la pantalla */
+@media (max-width:960px){.hero,.mocks,.offer,.calc{grid-template-columns:minmax(0,1fr)}}
+.url{min-width:0}
+/* A1: la tabla de posiciones cabe completa en el celular */
+@media (max-width:640px){
+  .tbl-wrap{overflow-x:visible}
+  table.heat{min-width:0;font-size:13px}
+  .heat thead th{padding:8px 4px;font-size:10.5px;letter-spacing:0}
+  .heat thead th.kw{font-size:11.5px;line-height:1.2;vertical-align:bottom}
+  .heat th[scope=row]{padding:10px 6px 10px 10px;font-size:13px;line-height:1.25}
+  .heat th[scope=row] .sub{display:none}
+  .heat td.c{padding:8px 2px;width:auto}
+  .heat .cell{min-width:34px;height:30px;padding:0 4px}
+  tr.group td{padding:6px 10px}
+}
+/* Remitente y aviso de confianza */
+.sender{font-size:14px;color:var(--band-muted);margin:0}
+.sender b{color:var(--band-ink);font-weight:600}
+.trust{font-size:13.5px;color:var(--band-muted);max-width:60ch;margin-top:10px}
+/* Resumen bajo el hero */
+.summary{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px 28px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;margin-top:28px}
+.summary h2{font-size:clamp(19px,2.4vw,23px);font-weight:750;margin-bottom:10px}
+.summary ul{margin:0;padding-left:20px;display:grid;gap:6px;font-size:15.5px}
+.summary .cta-num{color:var(--muted)}
+.summary .cta-num b{color:var(--ink)}
+@media (max-width:760px){.summary{grid-template-columns:minmax(0,1fr)}}
+/* Botón de WhatsApp como enlace real */
+a.btn.wa{text-decoration:none;min-height:48px}
+a.btn.wa:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+/* Barra fija de WhatsApp en el celular */
+.cta-bar{display:none}
+@media (max-width:640px){
+  .cta-bar{display:flex;position:sticky;bottom:0;z-index:10;justify-content:center;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:var(--band);box-shadow:0 -6px 18px rgba(0,0,0,.18)}
+  .cta-bar a.btn.wa{width:100%;justify-content:center;padding:12px 18px}
+}
+/* M1: encabezado compacto en el celular */
+@media (max-width:640px){
+  .band .wrap{padding-block:18px 20px;gap:12px}
+  .meta{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 16px}
+  .meta dd{font-size:14px}
+  .meta div:nth-child(n+3){display:none}
+}
+/* Índice: explicación y enlace a "Cómo medimos" */
+.tile.lead .d a{color:var(--band-ink)}
+/* M2/M4: colores que se distinguen sobre la banda */
+.wk.last .when,.result .be b{color:var(--accent-on-band)}
+/* M3: el bloqueo se ve intencional */
+.wk.locked{position:relative;padding-bottom:52px}
+.wk.locked::after{content:"Se entrega al contratar";position:absolute;left:18px;bottom:16px;font-size:12.5px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--sunk);color:var(--ink)}
+.wk.last.locked::after{background:rgba(255,255,255,.16);color:var(--band-ink)}
+/* M5: controles deslizantes cómodos para el dedo */
+.field input[type=range]{-webkit-appearance:none;appearance:none;height:44px;margin:0;background:transparent}
+.field input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:999px;background:var(--line)}
+.field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;margin-top:-10px;border-radius:50%;background:var(--accent);border:3px solid var(--surface)}
+.field input[type=range]::-moz-range-track{height:8px;border-radius:999px;background:var(--line)}
+.field input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;background:var(--accent);border:3px solid var(--surface)}
+/* M6: el precio no se corta */
+.price .amt small{display:block;margin-top:6px}
+.price .iva{font-size:13.5px;color:var(--muted)}
+/* M8: letra mínima legible en el celular */
+@media (max-width:640px){
+  .ai .why,.field .hint,.tiny,.legend{font-size:14px}
+  .ph-note,.meta dt,.you-tag,.acts span{font-size:12.5px}
+  .gp small{font-size:12px}
+}
+/* A5: respuestas de IA plegables y menos extras en el celular */
+.ai-mini{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:16px}
+.ai-mini div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:6px;min-width:0}
+.ai-mini b{font-family:var(--f-display);font-stretch:112%;font-size:16px}
+.ai-mini span{font-size:14px;color:var(--muted)}
+details.ai-more{margin-top:16px}
+details.ai-more > summary{cursor:pointer;font-weight:700;color:var(--pine);padding:12px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);list-style:none;display:flex;justify-content:space-between;gap:12px;align-items:center}
+details.ai-more > summary::-webkit-details-marker{display:none}
+details.ai-more > summary::after{content:"+";font-size:20px;line-height:1}
+details.ai-more[open] > summary::after{content:"−"}
+details.ai-more[open] > summary{margin-bottom:14px}
+@media (max-width:640px){
+  .ai-mini{grid-template-columns:minmax(0,1fr)}
+  .extra:nth-child(n+4){display:none}
+}
+/* B1: cuadrícula sin esquinas "sin medir" */
+.gp.na{visibility:hidden}
+@media (max-width:640px){.grid3{justify-self:center}}
+/* ===== Arreglos de la segunda auditoría (13-nov-2026) ===== */
+/* Las píldoras del hero pueden partirse en dos líneas: sin desborde a 360 px */
+.compare .pill{white-space:normal;text-align:left}
+/* La maqueta de la ficha cabe aunque una etiqueta sea larga */
+.photos,.acts{grid-template-columns:repeat(4,minmax(0,1fr))}
+.ph{overflow-wrap:anywhere}
+/* Los tramos del índice se distinguen entre sí */
+.stack span+span{box-shadow:inset 2px 0 0 var(--band)}
+/* Pantallas muy angostas (≤380 px): la tabla se compacta y, si aún no cabe, se desliza dentro de su caja */
+@media (max-width:380px){
+  .tbl-wrap{overflow-x:auto}
+  .heat .cell{min-width:28px;padding:0 3px}
+  .heat td.c{padding:8px 1px}
+  .heat th[scope=row]{padding:10px 4px 10px 8px;font-size:12.5px}
+}
+
+.gg{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;margin-bottom:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,68px);grid-template-rows:repeat(3,68px);gap:6px}
+.gp{border-radius:12px;display:grid;place-items:center;align-content:center;font-family:var(--f-display);font-stretch:115%;font-weight:800;font-size:22px;line-height:1;font-variant-numeric:tabular-nums}
+.gp small{font-family:var(--f-body);font-size:10.5px;font-weight:600;font-stretch:100%;margin-top:3px}
+.gp.na{border:1px dashed var(--line);color:var(--muted);font-size:11px;font-weight:500;font-family:var(--f-body);font-stretch:100%;text-align:center;padding:4px}
+.gp.home{box-shadow:0 0 0 3px var(--accent)}
+.gg h3{font-size:19px;margin-bottom:6px}
+.gg p{color:var(--muted);font-size:15px}
+.gg p + p{margin-top:8px}
+.bars{display:grid;gap:12px;min-width:min(320px,100%)}
+.bar-row{display:grid;gap:4px}
+.bar-row .bl{display:flex;justify-content:space-between;gap:10px;font-size:14px}
+.bar-row .bl b{font-variant-numeric:tabular-nums}
+.bar-track{height:12px;border-radius:999px;background:var(--sunk);overflow:hidden}
+.bar-track span{display:block;height:100%;min-width:6px;border-radius:999px;background:var(--seg-maps)}
+.bar-row.you .bl{color:var(--accent-ink);font-weight:700}
+.bar-row.you .bar-track span{background:var(--accent)}
+.quote{font-family:var(--f-display);font-stretch:108%;font-weight:700;font-size:clamp(19px,2.4vw,24px);line-height:1.3;color:var(--ink);border-left:4px solid var(--accent);padding:6px 0 6px 18px;margin:0 0 22px;max-width:62ch}
+.quote cite{display:block;font-family:var(--f-body);font-style:normal;font-weight:500;font-size:13.5px;color:var(--muted);margin-top:8px}
+@media (max-width:640px){.gg{grid-template-columns:1fr}.grid3{grid-template-columns:repeat(3,minmax(0,64px));grid-template-rows:repeat(3,64px)}}
+
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    
+    <symbol id="i-steth" viewBox="0 0 24 24"><path d="M6 3v6a5 5 0 0 0 10 0V3M11 14v2a4 4 0 0 0 8 0v-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="19" cy="11" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-syr" viewBox="0 0 24 24"><path d="M18 2l4 4M15 5l4 4M9.5 10.5l4 4M3 21l3.5-3.5M6.5 17.5l-2-2 9.5-9.5 4 4-9.5 9.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sci" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="18" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8.2 8.2L20 20M8.2 15.8L20 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-paw" viewBox="0 0 24 24"><ellipse cx="12" cy="16.5" rx="4.6" ry="3.8" fill="currentColor"/><ellipse cx="5.5" cy="10.5" rx="2" ry="2.5" fill="currentColor"/><ellipse cx="9.5" cy="6.5" rx="2" ry="2.6" fill="currentColor"/><ellipse cx="14.5" cy="6.5" rx="2" ry="2.6" fill="currentColor"/><ellipse cx="18.5" cy="10.5" rx="2" ry="2.5" fill="currentColor"/></symbol>
+    <symbol id="i-clinic" viewBox="0 0 24 24"><path d="M3 21V8l9-5 9 5v13H3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 10v6M9 13h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-team" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="9" r="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 20c.6-3.4 3-5.5 6-5.5s5.4 2.1 6 5.5M15 15c2.8-.4 5 1.4 5.8 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><path d="M12 2l9 9-9 9-9-9 9-9z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 14v-3h5M12 8.5l2.5 2.5L12 13.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 20l1.4-4.2A8 8 0 1 1 8.6 19L4 20z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-web" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-qr" viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M14 14h3v3h-3zM18 18h3v3h-3zM18 14h3M14 18v3" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6l8-3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8.5 12l2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 16l4-5 3 3 5-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 11h7M9 15h7M9 7h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  
+<symbol id="i-bread" viewBox="0 0 24 24"><path d="M3 11a9 5.5 0 0 1 18 0z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M3 14h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M4 16.5h16v1.5a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-coffee" viewBox="0 0 24 24"><path d="M4 9h12v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 10.5h2a2 2 0 0 1 0 4h-2M8 3.5v2.5M12 3.5v2.5M4 21h12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6L5 8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-snow" viewBox="0 0 24 24"><path d="M12 3v18M4.2 7.5l15.6 9M19.8 7.5l-15.6 9M9.5 4.5L12 6.5l2.5-2M9.5 19.5l2.5-2 2.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-plate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="band">
+  <div class="wrap">
+    <div class="topline">
+      <span class="eyebrow">Revisamos cómo encuentran su negocio en Google Maps y en ChatGPT</span>
+      <span class="pill">Preparado para ustedes</span>
+    </div>
+    <h1 class="patient">TRES CAFÉ</h1>
+    <dl class="meta">
+      <div><dt>Dirección</dt><dd>Calle 39 #192-E, entre 30 y 32, Santa Ana, Valladolid</dd></div>
+      <div><dt>Calificación en Google</dt><dd><span class="num">4.7 ★ · 45 opiniones · 83 fotos</span></dd></div>
+      <div><dt>Fecha de medición</dt><dd>13 de noviembre de 2026, 0:00 h</dd></div>
+    </dl>
+    <p class="sender">Les escribe: <b>WhatsApp 999 245 5767</b> · Mérida, Yucatán</p>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap" aria-labelledby="h-hero">
+    <div>
+      <div class="rank">
+        <span class="rank-num num" aria-hidden="true">0</span>
+        <span class="rank-lbl">de 4 búsquedas en Google Maps donde aparecen, buscando desde su propia puerta</span>
+      </div>
+      <h2 id="h-hero">Su vecino de la misma cuadra tiene 2,664 reseñas y sale en casi todas las búsquedas. Ustedes no salen en ninguna.</h2>
+      <p>Sus clientes elogian el pan una y otra vez: la palabra «panes» aparece en 9 de sus reseñas. Pero en una ciudad llena de turistas, quien busca «cafetería», «desayunos», «panadería» o «breakfast» ve 10 lugares y ninguno es TRES CAFÉ. Y <strong>ninguna de 6 respuestas</strong> de ChatGPT, Gemini y Perplexity los menciona.</p>
+      <div class="compare">
+        <span class="pill">Carolin Cacao · <b>2,664</b> reseñas · misma cuadra</span>
+        <span class="pill">De Poca Madre · <b>25</b> reseñas · 5º en «desayunos»</span>
+        <span class="pill" style="border-color:var(--accent);color:var(--accent-ink)">Ustedes · <b>45</b> reseñas · no salen</span>
+      </div>
+    </div>
+
+    <figure class="phone" style="margin:0" aria-label="Orden real de resultados en Google Maps para cafetería">
+      <div class="phone-screen">
+        <div class="ph-search"><svg width="16" height="16" aria-hidden="true"><use href="#i-search"/></svg><span>cafetería</span></div>
+        <div class="ph-note">Búsqueda desde Calle 39 #192-E, Santa Ana</div>
+        <ol class="res">
+          <li><span class="pos">1</span><span><span class="nm">EVA Art + Café</span><br><span class="rt"><span class="star">★</span> 4.8 · 289 reseñas</span></span><span></span></li>
+          <li><span class="pos">2</span><span><span class="nm">Carolin Cacao Cafe &amp; Gelato</span><br><span class="rt"><span class="star">★</span> 4.9 · 2,664 reseñas</span></span><span></span></li>
+          <li><span class="pos">3</span><span><span class="nm">Yogui Arte y Café</span><br><span class="rt"><span class="star">★</span> 4.9 · 472 reseñas</span></span><span></span></li>
+          <li class="fold" aria-hidden="true">▲ Lo que se ve en el celular sin deslizar</li>
+          <li><span class="pos">4</span><span><span class="nm">Rúa Café</span><br><span class="rt"><span class="star">★</span> 4.8 · 1,083 reseñas</span></span><span></span></li>
+          <li><span class="pos">5</span><span><span class="nm">ConKafecito Centro</span><br><span class="rt"><span class="star">★</span> 4.9 · 111 reseñas</span></span><span></span></li>
+          <li><span class="pos">6</span><span><span class="nm">Café Arte Jardín</span><br><span class="rt"><span class="star">★</span> 4.7 · 103 reseñas</span></span><span></span></li>
+          <li><span class="pos">7</span><span><span class="nm">Alma y Lumo Coffee</span><br><span class="rt"><span class="star">★</span> 4.8 · 84 reseñas</span></span><span></span></li>
+          <li><span class="pos">…</span><span><span class="nm">3 más hasta el 10º</span></span><span></span></li>
+          <li class="you"><span class="pos">—</span><span><span class="nm">TRES CAFÉ</span><br><span class="rt">No aparece en los primeros 10</span></span><span class="you-tag">Ustedes</span></li>
+        </ol>
+      </div>
+      <figcaption class="cap">Orden real de Google Maps, medido el 13 nov 2026.</figcaption>
+    </figure>
+  </section>
+  <section class="wrap" aria-labelledby="h-sum" style="padding-block:0">
+    <div class="summary">
+      <div>
+        <h2 id="h-sum">Lo que les está costando clientes</h2>
+        <ul>
+          <li>Buscando desde su propia puerta, no salen entre los primeros 10 en «cafetería», «desayunos», «panadería» ni «breakfast».</li>
+          <li>Ninguna de 6 respuestas de ChatGPT, Gemini y Perplexity los menciona, ni en español ni en inglés.</li>
+          <li>Las IA citan TripAdvisor y páginas web propias. Ustedes solo tienen Instagram, y en sus reseñas todavía aparecen como «Mildred Café».</li>
+        </ul>
+      </div>
+      <div class="cta"><a class="btn wa" href="https://wa.me/529992455767?text=Me%20interesa%20la%20propuesta" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Me interesa la propuesta</a><span class="cta-num">Se abre WhatsApp con el <b>999 245 5767</b></span></div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="h-vit">
+    <div class="sec-head">
+      <span class="sec-tag">Cómo están hoy</span>
+      <h2 id="h-vit">Su visibilidad hoy, en cuatro números</h2>
+      <p>Medimos 4 búsquedas en Google Maps (una en inglés, como la haría un turista), 6 respuestas de inteligencia artificial y los puntos básicos de su ficha.</p>
+    </div>
+    <div class="vitals">
+      <div class="tile lead">
+        <span class="k">Índice de visibilidad local</span>
+        <span class="v num">15<small> / 100</small></span>
+        <div class="stack" role="img" aria-label="Google Maps 0 de 40, inteligencia artificial 0 de 30, ficha 15 de 30">
+          <span style="width:0%;background:var(--seg-maps)"></span>
+          <span style="width:0%;background:var(--accent-on-band)"></span>
+          <span style="width:15%;background:var(--band-muted)"></span>
+        </div>
+        <div class="legend">
+          <div><span><i style="background:var(--seg-maps)"></i>Google Maps</span><span class="num">0 / 40</span></div>
+          <div><span><i style="background:var(--accent-on-band)"></i>Asistentes de IA</span><span class="num">0 / 30</span></div>
+          <div><span><i style="background:var(--band-muted)"></i>Ficha de Google</span><span class="num">15 / 30</span></div>
+        </div>
+        <span class="d">Calificación de 0 a 100 con lo que medimos en Google Maps, en las IA y en su ficha. <a href="#como-medimos">Cómo se calcula</a></span>
+      </div>
+      <div class="tile">
+        <span class="k">Google Maps</span>
+        <span class="v num">0<small> de 4</small></span>
+        <span class="d">búsquedas donde aparecen. Ni buscando desde su propia puerta.</span>
+        <span class="status s-bad">Fuera en las 4</span>
+      </div>
+      <div class="tile">
+        <span class="k">ChatGPT, Gemini y Perplexity</span>
+        <span class="v num">0<small> de 6</small></span>
+        <span class="d">respuestas los mencionan. Tres eran en inglés, como preguntaría un turista.</span>
+        <span class="status s-bad">Invisibles para las IA</span>
+      </div>
+      <div class="tile">
+        <span class="k">Ficha de Google</span>
+        <span class="v num">3<small> de 6</small></span>
+        <span class="d">puntos básicos en orden: reclamada (registrada a nombre del negocio), sin duplicados y 83 fotos.</span>
+        <span class="status s-warn">Solo dice «Cafetería»</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="h-heat">
+    <div class="sec-head">
+      <span class="sec-tag">En Google Maps</span>
+      <h2 id="h-heat">Su vecino tiene 2,664 reseñas; ustedes no salen en ninguna búsqueda</h2>
+      <p>Primero, cuántas reseñas tienen ustedes y sus vecinos de la misma cuadra. Después, las cuatro búsquedas con su competencia.</p>
+    </div>
+    <div class="gg">
+      <div class="bars" role="img" aria-label="Reseñas en Google: Carolin Cacao 2,664, Panadería La Especial 172, TRES CAFÉ 45">
+        <div class="bar-row"><div class="bl"><span>Carolin Cacao Cafe &amp; Gelato · #194-E</span><b>2,664</b></div><div class="bar-track"><span style="width:100%"></span></div></div>
+        <div class="bar-row"><div class="bl"><span>Panadería La Especial · #194</span><b>172</b></div><div class="bar-track"><span style="width:6%"></span></div></div>
+        <div class="bar-row you"><div class="bl"><span>TRES CAFÉ · #192-E</span><b>45</b></div><div class="bar-track"><span style="width:2%"></span></div></div>
+      </div>
+      <div>
+        <h3>Calle 39: la misma cuadra, otra liga</h3>
+        <p>Carolin Cacao, en el 194-E de la misma calle, tiene 59 veces más reseñas que ustedes y sale en 3 de las 4 búsquedas.</p>
+        <p>La Panadería La Especial, en el 194, tiene 172 y sale 3º en «panadería». Esa búsqueda sí se puede ganar: ahí nadie de los primeros 10 pasa de 270 reseñas.</p>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table class="heat">
+        <thead>
+          <tr>
+            <th scope="col">Negocio</th>
+            <th scope="col" class="kw">cafetería</th>
+            <th scope="col" class="kw">desayunos</th>
+            <th scope="col" class="kw">panadería</th>
+            <th scope="col" class="kw">breakfast</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="you-row">
+            <th scope="row">TRES CAFÉ<span class="sub">Ustedes · 4.7 ★ (45) · categoría «Cafetería»</span></th>
+            <td class="c"><span class="cell c0">—</span></td>
+            <td class="c"><span class="cell c0">—</span></td>
+            <td class="c"><span class="cell c0">—</span></td>
+            <td class="c"><span class="cell c0">—</span></td>
+          </tr>
+          <tr class="group"><td colspan="5">Su misma cuadra</td></tr>
+          <tr>
+            <th scope="row">Carolin Cacao Cafe &amp; Gelato<span class="sub">C. 39 #194-E · 4.9 ★ (2,664)</span></th>
+            <td class="c"><span class="cell c1">2</span></td>
+            <td class="c"><span class="cell c2">4</span></td>
+            <td class="c"><span class="cell c0">—</span></td>
+            <td class="c"><span class="cell c2">6</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Panadería La Especial<span class="sub">C. 39 #194 · 4.5 ★ (172)</span></th>
+            <td class="c"><span class="cell c0">—</span></td>
+            <td class="c"><span class="cell c0">—</span></td>
+            <td class="c"><span class="cell c1">3</span></td>
+            <td class="c"><span class="cell c0">—</span></td>
+          </tr>
+          <tr class="group"><td colspan="5">Los que se llevan las búsquedas</td></tr>
+          <tr>
+            <th scope="row">Rúa Café<span class="sub">4.8 ★ (1,083) · «Restaurante de desayunos»</span></th>
+            <td class="c"><span class="cell c2">4</span></td>
+            <td class="c"><span class="cell c1">1</span></td>
+            <td class="c"><span class="cell c0">—</span></td>
+            <td class="c"><span class="cell c1">2</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Yogui Arte y Café<span class="sub">4.9 ★ (472)</span></th>
+            <td class="c"><span class="cell c1">3</span></td>
+            <td class="c"><span class="cell c3">8</span></td>
+            <td class="c"><span class="cell c0">—</span></td>
+            <td class="c"><span class="cell c1">1</span></td>
+          </tr>
+          <tr>
+            <th scope="row">De Poca Madre<span class="sub">5.0 ★ (25) · «Restaurante de desayunos»</span></th>
+            <td class="c"><span class="cell c0">—</span></td>
+            <td class="c"><span class="cell c2">5</span></td>
+            <td class="c"><span class="cell c0">—</span></td>
+            <td class="c"><span class="cell c2">5</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Panadería El Divino Niño<span class="sub">4.5 ★ (53)</span></th>
+            <td class="c"><span class="cell c0">—</span></td>
+            <td class="c"><span class="cell c0">—</span></td>
+            <td class="c"><span class="cell c1">1</span></td>
+            <td class="c"><span class="cell c0">—</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Panadería San Juan<span class="sub">4.6 ★ (108)</span></th>
+            <td class="c"><span class="cell c0">—</span></td>
+            <td class="c"><span class="cell c0">—</span></td>
+            <td class="c"><span class="cell c1">2</span></td>
+            <td class="c"><span class="cell c0">—</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="heat-key">
+      <span><span class="cell c1">1–3</span> se ve sin deslizar</span>
+      <span><span class="cell c2">4–7</span> hay que deslizar</span>
+      <span><span class="cell c3">8–10</span> muy abajo en la lista</span>
+      <span><span class="cell c0">—</span> no aparece</span>
+    </div>
+    <div class="callouts">
+      <div class="callout alert"><b>Ni desde su puerta</b>En las cuatro búsquedas Google muestra 10 lugares y ninguno es TRES CAFÉ, aunque el mapa estaba centrado en su local.</div>
+      <div class="callout"><b>Con 25 reseñas sí se puede</b>De Poca Madre tiene menos reseñas que ustedes y sale 5º en «desayunos» y en «breakfast». Su categoría es «Restaurante de desayunos».</div>
+      <div class="callout"><b>«Panadería» es la puerta de entrada</b>Ahí los primeros 10 tienen entre 12 y 270 reseñas. Con la categoría correcta y fotos de su pan, es la búsqueda más fácil de ganar.</div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="h-ai">
+    <div class="sec-head">
+      <span class="sec-tag">En ChatGPT y otras IA</span>
+      <h2 id="h-ai">Le preguntamos a ChatGPT, Gemini y Perplexity dónde desayunar en Valladolid</h2>
+      <p>Valladolid vive del turismo, y muchos turistas le piden la recomendación a un asistente. Hicimos una pregunta en español y otra en inglés a cada uno, sin iniciar sesión.</p>
+    </div>
+    <div class="ai-mini">
+      <div><b>ChatGPT</b><span class="status s-bad">0 de 2</span><span>Recomienda MariaPura, Rúa, Yogui y Canto Encanto; en inglés, con la calificación de TripAdvisor.</span></div>
+      <div><b>Gemini</b><span class="status s-bad">0 de 2</span><span>En español, tres cafés con su página web; en inglés, cuatro lugares de una guía para turistas.</span></div>
+      <div><b>Perplexity</b><span class="status s-bad">0 de 2</span><span>Las dos veces responde Carolin Cacao, su vecino de cuadra, según TripAdvisor.</span></div>
+    </div>
+    <div class="insight">
+      <span class="big num">0/6</span>
+      <div>
+        <p><strong>Las IA recomiendan lo que encuentran en TripAdvisor y en páginas propias.</strong> Gemini citó la página web de MariaPura, Rúa Café y Carolin Cacao. ChatGPT, en inglés, puso la calificación de TripAdvisor junto a cada lugar.</p>
+        <p>TRES CAFÉ solo tiene Instagram. Además, varias reseñas todavía los llaman «Mildred Café», así que en internet conviven dos nombres.</p>
+      </div>
+    </div>
+    <details class="ai-more">
+      <summary>Ver qué respondió cada asistente</summary>
+      <div class="ai-grid">
+      <span class="ai-col-h sp" aria-hidden="true"></span>
+      <span class="ai-col-h">ChatGPT</span>
+      <span class="ai-col-h">Gemini</span>
+      <span class="ai-col-h">Perplexity</span>
+
+      <p class="ai-q">Pregunta 1<b>«¿Cuál es la mejor cafetería para desayunar en Valladolid, Yucatán?»</b></p>
+      <div class="ai miss">
+        <span class="who">ChatGPT</span>
+        <span class="status s-bad">No aparecen</span>
+        <ol>
+          <li>MariaPura Café</li>
+          <li>Rúa Café</li>
+          <li>Yogui Arte y Café</li>
+          <li>Canto Encanto</li>
+        </ol>
+        <p class="why">Citó una guía turística de Yucatán.</p>
+      </div>
+      <div class="ai miss">
+        <span class="who">Gemini</span>
+        <span class="status s-bad">No aparecen</span>
+        <ol>
+          <li>MariaPura Brunch y Café</li>
+          <li>Rúa Café</li>
+          <li>Carolin Cacao</li>
+        </ol>
+        <p class="why">Junto a cada uno citó su página web.</p>
+      </div>
+      <div class="ai miss">
+        <span class="who">Perplexity</span>
+        <span class="status s-bad">No aparecen</span>
+        <ol>
+          <li>Carolin Cacao Café Boutique</li>
+        </ol>
+        <p class="why">Lo sacó de TripAdvisor.</p>
+      </div>
+
+      <p class="ai-q">Pregunta 2<b>«What’s the best place for breakfast and coffee in Valladolid, Yucatan?»</b></p>
+      <div class="ai miss">
+        <span class="who">ChatGPT</span>
+        <span class="status s-bad">No aparecen</span>
+        <ol>
+          <li>Canto Encanto</li>
+          <li>Rúa Café</li>
+          <li>Carolin Cacao</li>
+          <li>Yogui Arte y Café</li>
+          <li>Pak’al Restaurante &amp; Café</li>
+        </ol>
+        <p class="why">Puso la calificación de TripAdvisor de cada uno. Pak’al está en su mismo barrio, Santa Ana.</p>
+      </div>
+      <div class="ai miss">
+        <span class="who">Gemini</span>
+        <span class="status s-bad">No aparecen</span>
+        <ol>
+          <li>MariaPura Brunch y Café</li>
+          <li>La Rúa Café</li>
+          <li>Bike House Coffee</li>
+          <li>El Mesón del Marqués</li>
+        </ol>
+        <p class="why">Una guía en inglés para turistas, sin TRES CAFÉ.</p>
+      </div>
+      <div class="ai miss">
+        <span class="who">Perplexity</span>
+        <span class="status s-bad">No aparecen</span>
+        <ol>
+          <li>Carolin Cacao Café Boutique</li>
+        </ol>
+        <p class="why">Otra vez TripAdvisor decide la respuesta.</p>
+      </div>
+    </div>
+    </details>
+  </section>
+
+  <section class="wrap" aria-labelledby="h-dx">
+    <div class="sec-head">
+      <span class="sec-tag">Qué está fallando</span>
+      <h2 id="h-dx">Seis hallazgos en su ficha, del más urgente al que ya está bien</h2>
+    </div>
+    <div class="dx">
+      <div class="dx-row sev-c">
+        <span class="status s-bad">Urgente</span>
+        <div><h3>Compiten contra cafés con cientos y miles de reseñas</h3><p class="ev">45 reseñas. Los 7 primeros en «cafetería» tienen de 84 a 2,664.</p></div>
+        <p class="fx">En Valladolid la competencia vive de turistas que dejan reseñas. Hay que pedirlas en cada mesa, en Google y en TripAdvisor.</p>
+      </div>
+      <div class="dx-row sev-c">
+        <span class="status s-bad">Urgente</span>
+        <div><h3>Invisibles para los turistas que le preguntan a una IA</h3><p class="ev">0 de 6 respuestas, en español y en inglés.</p></div>
+        <p class="fx">Las IA citan TripAdvisor y páginas web propias. En ninguna de las 6 respuestas apareció algo de ustedes.</p>
+      </div>
+      <div class="dx-row sev-a">
+        <span class="status s-warn">Importante</span>
+        <div><h3>Su ficha solo dice «Cafetería»</h3><p class="ev">No salen en «desayunos», «panadería» ni «breakfast».</p></div>
+        <p class="fx">De Poca Madre, con 25 reseñas y la categoría «Restaurante de desayunos», sale 5º. Ustedes venden pan, pero su ficha no lo dice: agregar «Panadería» es lo primero que probaríamos.</p>
+      </div>
+      <div class="dx-row sev-a">
+        <span class="status s-warn">Importante</span>
+        <div><h3>Dos nombres en internet</h3><p class="ev">Varias reseñas dicen «Mildred Café». La ficha dice TRES CAFÉ.</p></div>
+        <p class="fx">Para que las IA y los turistas no se confundan, hay que decir «antes Mildred Café» en la ficha y en la página.</p>
+      </div>
+      <div class="dx-row sev-m">
+        <span class="status s-mid">Mejorable</span>
+        <div><h3>Sin página propia ni reseñas respondidas</h3><p class="ev">El enlace de la ficha lleva a Instagram. Las reseñas recientes no tienen respuesta.</p></div>
+        <p class="fx">Gemini citó las páginas propias de otros cafés; una página sencilla, en español y en inglés, les da algo que citar. Responder reseñas, también en inglés, le muestra a Google que el negocio está activo.</p>
+      </div>
+      <div class="dx-row sev-ok">
+        <span class="status s-good">En orden</span>
+        <div><h3>Lo que ya tienen es muy bueno</h3><p class="ev">4.7 ★, 83 fotos, ficha reclamada y abierto todos los días de 7 a 15 h.</p></div>
+        <p class="fx">Sus reseñas hablan del pan, de porciones grandes, de un lugar climatizado y de buena música. Es justo lo que busca un turista con calor.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="h-tx">
+    <div class="sec-head">
+      <span class="sec-tag">Plan de 30 días</span>
+      <h2 id="h-tx">Visibilidad Local en 30 días, paso a paso</h2>
+      <p>Lo primero es lo más rápido: decirle a Google todo lo que son, en español y en inglés.</p>
+    </div>
+    <div class="plan">
+      <div class="wk">
+        <span class="when">Semana 1</span>
+        <h3>Decirle a Google todo lo que son</h3>
+        <ul>
+          <li>Categorías: cafetería, panadería y restaurante de desayunos</li>
+          <li>Descripción en español y en inglés, con «antes Mildred Café»</li>
+          <li>Atributos: para llevar, wifi y formas de pago</li>
+        </ul>
+      </div>
+      <div class="wk">
+        <span class="when">Semana 2</span>
+        <h3>El pan y el menú a la vista</h3>
+        <ul>
+          <li>Menú con precios en la ficha, en español y en inglés</li>
+          <li>20 fotos nuevas: el pan del día, los desayunos y el lugar</li>
+          <li>Preguntas frecuentes para turistas</li>
+        </ul>
+      </div>
+      <div class="wk locked">
+        <span class="when">Semana 3</span>
+        <h3>Que turistas e IA los encuentren</h3>
+        <ul aria-hidden="true">
+          <li>Paso del plan que se entrega al contratar</li>
+          <li>Detalle del trabajo de esta semana</li>
+          <li>Entregables y revisión con ustedes</li>
+        </ul>
+      </div>
+      <div class="wk locked">
+        <span class="when">Semana 4</span>
+        <h3>Reseñas en Google y TripAdvisor</h3>
+        <ul aria-hidden="true">
+          <li>Paso del plan que se entrega al contratar</li>
+          <li>Detalle del trabajo de esta semana</li>
+          <li>Entregables y revisión con ustedes</li>
+        </ul>
+      </div>
+      <div class="wk last locked">
+        <span class="when">Día 30</span>
+        <h3>Volver a medir</h3>
+        <ul aria-hidden="true">
+          <li>Paso del plan que se entrega al contratar</li>
+          <li>Detalle del trabajo de esta semana</li>
+          <li>Entregables y revisión con ustedes</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="h-mk">
+    <div class="sec-head">
+      <span class="sec-tag">Cómo se vería</span>
+      <h2 id="h-mk">Así se podría ver su ficha y su página en 30 días</h2>
+      <p>Maquetas para dar una idea. Las imágenes son ilustrativas: en el trabajo real usamos fotos de su pan y de su café, tomadas con su permiso.</p>
+    </div>
+    <div class="mocks">
+      <div>
+        <div class="mock-label"><h3>Ficha optimizada</h3><span class="ilus">Maqueta ilustrativa</span></div>
+        <div class="phone" style="justify-self:start">
+          <div class="phone-screen">
+            <div class="mapbox" aria-hidden="true">
+              <svg class="pin" width="30" height="38" viewBox="0 0 30 38"><path d="M15 37C15 37 2 22.5 2 14a13 13 0 0 1 26 0c0 8.5-13 23-13 23z" fill="var(--accent)"/><circle cx="15" cy="14" r="5" fill="var(--surface)"/></svg>
+            </div>
+            <div class="sheet">
+              <h4>TRES CAFÉ <span class="ver"><svg width="11" height="11" aria-hidden="true"><use href="#i-check"/></svg>Verificada</span></h4>
+              <div class="line"><span style="color:var(--warn)">★★★★★</span> 4.7 · Cafetería · Panadería · Desayunos</div>
+              <div class="line"><span class="open">Abierto</span> · Todos los días de 7 a.m. a 3 p.m.</div>
+              <div class="chips"><span>Pan del día</span><span>Desayunos</span><span>Brunch</span><span>Climatizado</span><span>English menu</span><span>Para llevar</span></div>
+              <div class="acts">
+                <span><svg width="18" height="18" aria-hidden="true"><use href="#i-phone"/></svg>Llamar</span>
+                <span><svg width="18" height="18" aria-hidden="true"><use href="#i-route"/></svg>Ruta</span>
+                <span><svg width="18" height="18" aria-hidden="true"><use href="#i-chat"/></svg>WhatsApp</span>
+                <span><svg width="18" height="18" aria-hidden="true"><use href="#i-web"/></svg>Sitio web</span>
+              </div>
+              <div class="photos">
+                <div class="ph ph3"><svg aria-hidden="true"><use href="#i-bread"/></svg>Pan del día</div>
+                <div class="ph ph2"><svg aria-hidden="true"><use href="#i-coffee"/></svg>Café</div>
+                <div class="ph ph1"><svg aria-hidden="true"><use href="#i-plate"/></svg>Desayunos</div>
+                <div class="ph ph4"><svg aria-hidden="true"><use href="#i-snow"/></svg>Con A/C</div>
+              </div>
+              <div class="post"><b>Novedad · hace 2 días</b>Pan recién salido del horno toda la mañana. Fresh bread every morning, A/C and English menu.</div>
+              <div class="reply"><b>Respuesta del propietario</b> (ejemplo): Thank you for visiting! Nos da gusto que le haya gustado el pan. ¡Vuelva pronto!</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="mock-label"><h3>Página web de una sección</h3><span class="ilus">Maqueta ilustrativa</span></div>
+        <div class="browser">
+          <div class="bar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="url">trescafe.mx (dominio de ejemplo)</span></div>
+          <div class="lp-hero">
+            <div>
+              <h4>Pan recién horneado y desayunos en Valladolid</h4>
+              <p>Fresh bread &amp; breakfast. Calle 39 #192-E, Santa Ana. Todos los días de 7 a 15 h, en un lugar climatizado.</p>
+              <span class="btn"><svg width="16" height="16" aria-hidden="true"><use href="#i-chat"/></svg>Escríbenos por WhatsApp</span>
+            </div>
+            <svg class="dog" viewBox="0 0 200 170" role="img" aria-label="Ilustración de un café y un croissant">
+              <circle cx="100" cy="86" r="74" fill="var(--surface)"/>
+              <ellipse cx="88" cy="134" rx="58" ry="9" fill="var(--sunk)"/>
+              <path d="M50 78h76v26a30 30 0 0 1-30 30H80a30 30 0 0 1-30-30z" fill="var(--cup)" stroke="var(--coffee)" stroke-width="3"/>
+              <path d="M126 86h8a12 12 0 0 1 0 24h-10" fill="none" stroke="var(--coffee)" stroke-width="5"/>
+              <ellipse cx="88" cy="78" rx="38" ry="7" fill="var(--coffee)"/>
+              <path d="M76 66c-6-8 6-12 0-22M92 62c-6-8 6-12 0-22M108 66c-6-8 6-12 0-22" fill="none" stroke="var(--muted)" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+              <g transform="translate(146 120) rotate(-12)"><path d="M-30 6C-26-14 26-14 30 6C20 0 10 4 0 4S-20 0-30 6z" fill="var(--croissant)"/><path d="M-14-6l4 10M0-9v12M14-6l-4 10" stroke="var(--croissant-dark)" stroke-width="2.5" stroke-linecap="round"/></g>
+            </svg>
+          </div>
+          <div class="lp-sv">
+            <div><svg aria-hidden="true"><use href="#i-bread"/></svg><b>Pan del día</b>Dulce y salado, toda la mañana</div>
+            <div><svg aria-hidden="true"><use href="#i-plate"/></svg><b>Desayunos</b>Porciones grandes</div>
+            <div><svg aria-hidden="true"><use href="#i-coffee"/></svg><b>Café</b>Caliente y frío</div>
+            <div><svg aria-hidden="true"><use href="#i-bag"/></svg><b>Para llevar</b>Pan y comida lista</div>
+            <div><svg aria-hidden="true"><use href="#i-snow"/></svg><b>Climatizado</b>Fresco aunque afuera haga calor</div>
+            <div><svg aria-hidden="true"><use href="#i-web"/></svg><b>English menu</b>Para turistas</div>
+          </div>
+          <div class="lp-foot"><span>★ 4.7 en Google · 45 opiniones</span><span>Antes Mildred Café</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="h-calc">
+    <div class="sec-head">
+      <span class="sec-tag">¿Cuánto les deja?</span>
+      <h2 id="h-calc">Hagan la cuenta con sus propios números</h2>
+      <p>Los valores de inicio son un ejemplo. Muevan las barras con su gasto promedio y cuántas veces vuelve un cliente.</p>
+    </div>
+    <form class="calc" id="calc" onsubmit="return false">
+      <div>
+        <div class="field">
+          <label for="f-new">Clientes nuevos al mes que llegan por Google, TripAdvisor o una IA <output id="o-new" for="f-new">10</output></label>
+          <input type="range" id="f-new" min="1" max="40" step="1" value="10">
+          <span class="hint">Turistas y vecinos que no los conocían.</span>
+        </div>
+        <div class="field">
+          <label for="f-ticket">Gasto promedio por visita <output id="o-ticket" for="f-ticket">$220</output></label>
+          <input type="range" id="f-ticket" min="80" max="600" step="10" value="220">
+          <span class="hint">Un desayuno con café, o pan para llevar.</span>
+        </div>
+        <div class="field">
+          <label for="f-visits">Veces al año que vuelve cada cliente nuevo <output id="o-visits" for="f-visits">2</output></label>
+          <input type="range" id="f-visits" min="1" max="24" step="1" value="2">
+          <span class="hint">Un turista viene una o dos veces; un vecino, muchas más.</span>
+        </div>
+      </div>
+      <div class="result" aria-live="polite">
+        <span class="lbl">Ventas adicionales en el primer año, antes de costos</span>
+        <span class="big" id="r-year">—</span>
+        <span class="lbl" id="r-detail"></span>
+        <p class="be" id="r-be">El arranque cuesta $2,900 + IVA.</p>
+      </div>
+    </form>
+  </section>
+
+  <section class="wrap" aria-labelledby="h-offer">
+    <div class="sec-head">
+      <span class="sec-tag">Precio</span>
+      <h2 id="h-offer">Un solo pago para arrancar. El mantenimiento de $299 al mes es opcional.</h2>
+    </div>
+    <div class="offer">
+      <div class="price">
+        <span class="name">Visibilidad Local en 30 días</span>
+        <span class="amt num">$2,900 <small>MXN + IVA · pago único ($3,364 con IVA)</small></span>
+        <div class="launch"><b>Precio de apertura: $2,600 + IVA</b> ($3,016 con IVA) si arrancamos antes del 30 de noviembre.</div>
+        <ul>
+          <li>Categorías de cafetería, panadería y desayunos, y descripción en español e inglés</li>
+          <li>Menú con precios en la ficha, en dos idiomas</li>
+          <li>20 fotos reales mejoradas y portada</li>
+          <li>Página web de una sección, en español e inglés, con botón de WhatsApp</li>
+          <li>Su ficha en TripAdvisor, Apple Maps y Bing Places, con los mismos datos</li>
+          <li>Respuesta a sus reseñas, también en inglés</li>
+          <li>4 publicaciones en la ficha</li>
+        </ul>
+        <div class="maint">
+          <span class="mname">Mantenimiento mensual, opcional</span>
+          <span class="mamt num">$299 <small>MXN + IVA al mes ($347 con IVA)</small></span>
+          <p>Respuesta a cada reseña nueva, en español o en inglés, 2 publicaciones al mes, cambios de menú y precios, y un reporte mensual de su posición. Sin plazo forzoso.</p>
+        </div>
+        <p class="small muted">Arranque: 50% para empezar y 50% al entregar. Con factura. La dirección web queda a nombre de ustedes y se paga aparte; normalmente cuesta unos cientos de pesos al año.</p>
+      </div>
+      <div class="extras">
+        <div class="extra"><svg aria-hidden="true"><use href="#i-chart"/></svg><h3>Reporte de antes y después</h3><p>A los 30 días repetimos las mismas búsquedas y las mismas preguntas, en español y en inglés.</p></div>
+        <div class="extra"><svg aria-hidden="true"><use href="#i-shield"/></svg><h3>Exclusividad en su zona</h3><p>Durante 6 meses no trabajamos con otra cafetería del centro de Valladolid.</p></div>
+        <div class="extra"><svg aria-hidden="true"><use href="#i-qr"/></svg><h3>QR en cada mesa</h3><p>Para dejar reseña en Google o en TripAdvisor mientras esperan su café.</p></div>
+        <div class="extra"><svg aria-hidden="true"><use href="#i-chat"/></svg><h3>WhatsApp Business listo</h3><p>Menú como catálogo, respuestas rápidas en español e inglés y mensaje de fuera de horario.</p></div>
+        <div class="extra"><svg aria-hidden="true"><use href="#i-doc"/></svg><h3>Plantillas listas</h3><p>Respuestas a reseñas en los dos idiomas y el aviso de «antes Mildred Café» para sus redes.</p></div>
+        <div class="extra"><svg aria-hidden="true"><use href="#i-cal"/></svg><h3>Temporadas altas</h3><p>Publicaciones listas para diciembre y Semana Santa, cuando llegan más turistas.</p></div>
+      </div>
+    </div>
+    <div class="next">
+      <div>
+        <h3>Siguiente paso: un café de 20 minutos en su local</h3>
+        <p>Agregamos las categorías de panadería y desayunos ese mismo día. Es el cambio más rápido y el que primero se nota.</p>
+        <p class="trust">No somos Google ni trabajamos para Google. Nunca les vamos a pedir contraseñas ni códigos por mensaje: la verificación la hacen ustedes desde su celular.</p>
+      </div>
+      <div class="cta"><a class="btn wa" href="https://wa.me/529992455767?text=Me%20interesa%20la%20propuesta" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Me interesa la propuesta</a><span class="cta-num">Se abre WhatsApp con el <b>999 245 5767</b></span></div>
+    </div>
+  </section>
+  <div class="cta-bar"><a class="btn wa" href="https://wa.me/529992455767?text=Me%20interesa%20la%20propuesta" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-chat"/></svg>Me interesa la propuesta</a></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div id="como-medimos">
+      <h4>Cómo medimos</h4>
+      <ul>
+        <li>Google Maps: búsquedas con el mapa centrado en su local, sin iniciar sesión.</li>
+        <li>IA: ChatGPT, Gemini y Perplexity en su versión gratuita, sin iniciar sesión, el mismo día; una pregunta en español y otra en inglés.</li>
+        <li>Medimos a la medianoche, con su local cerrado. Google suele favorecer a los negocios abiertos; los resultados cambian según el lugar, la hora y el teléfono de quien busca.</li>
+      </ul>
+    </div>
+    <div>
+      <h4>El índice de 100 puntos</h4>
+      <ul>
+        <li>Google Maps, 40: por cada búsqueda medida desde su local, 10 si sale del 1 al 3, 6 del 4 al 7 y 3 del 8 al 10.</li>
+        <li>IA, 30: 5 por cada respuesta que menciona al negocio.</li>
+        <li>Ficha, 30: 5 por cada punto (reclamada, web propia, sin duplicados, 50+ fotos, responde reseñas, 4.5+ con 100+ reseñas).</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Sobre este documento</h4>
+      <ul>
+        <li>Las maquetas e imágenes son ilustrativas. No usamos su logo ni sus fotos sin permiso.</li>
+        <li>Datos tomados de fuentes públicas: Google Maps y las respuestas de cada asistente.</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.CALC={"price":2900,"us":"visita","up":"visitas","vs":"visita","vp":"visitas"};
+(function(){
+  var C=window.CALC||{price:2900,us:'visita',up:'visitas',vs:'visita',vp:'visitas'};
+  var CS=C.cs||'cliente nuevo', CP=C.cp||'clientes nuevos', EACH=C.each||'cada uno';
+  var fmt=function(n){return '$'+Math.round(n).toLocaleString('es-MX');};
+  var pl=function(n,s,p){return n+' '+(n===1?s:p);};
+  var a=document.getElementById('f-new'),t=document.getElementById('f-ticket'),v=document.getElementById('f-visits');
+  function o(id,x){document.getElementById(id).textContent=x;}
+  function u(){
+    var A=+a.value,T=+t.value,V=+v.value;
+    // Cada mes llegan A clientes nuevos. Su primera visita cae ese mes y las demás (V-1) se reparten en los meses siguientes.
+    // Ventas del primer año: los que llegan en el mes k solo alcanzan a volver durante (12-k) meses.
+    var year=A*T*(12+(V-1)*66/12);
+    var m=0,acc=0;
+    while(acc<C.price && m<36){ m++; acc+=A*T + A*(m-1)*T*(V-1)/12; }
+    o('o-new',A);o('o-ticket',fmt(T));o('o-visits',V);o('r-year',fmt(year));
+    o('r-detail',pl(A*12,CS,CP)+' en el año · '+pl(V,C.vs,C.vp)+' al año '+EACH+' · '+fmt(T));
+    var p=document.getElementById('r-be');
+    p.textContent='El arranque cuesta '+fmt(C.price)+' + IVA. Con '+pl(A,CS,CP)+' al mes, las ventas extra lo cubren en ';
+    var b=document.createElement('b');b.textContent=(m>=36?'más de 3 años':'unos '+pl(m,'mes','meses'));p.appendChild(b);
+    p.appendChild(document.createTextNode('.'));
+  }
+  [a,t,v].forEach(function(e){e.addEventListener('input',u);});
+  u();
+})();
+
+</script>
+
+</html>

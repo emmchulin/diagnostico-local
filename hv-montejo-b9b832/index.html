@@ -419,6 +419,21 @@ details.ai-more[open] > summary{margin-bottom:14px}
 /* B1: cuadrícula sin esquinas "sin medir" */
 .gp.na{visibility:hidden}
 @media (max-width:640px){.grid3{justify-self:center}}
+/* ===== Arreglos de la segunda auditoría (13-nov-2026) ===== */
+/* Las píldoras del hero pueden partirse en dos líneas: sin desborde a 360 px */
+.compare .pill{white-space:normal;text-align:left}
+/* La maqueta de la ficha cabe aunque una etiqueta sea larga */
+.photos,.acts{grid-template-columns:repeat(4,minmax(0,1fr))}
+.ph{overflow-wrap:anywhere}
+/* Los tramos del índice se distinguen entre sí */
+.stack span+span{box-shadow:inset 2px 0 0 var(--band)}
+/* Pantallas muy angostas (≤380 px): la tabla se compacta y, si aún no cabe, se desliza dentro de su caja */
+@media (max-width:380px){
+  .tbl-wrap{overflow-x:auto}
+  .heat .cell{min-width:28px;padding:0 3px}
+  .heat td.c{padding:8px 1px}
+  .heat th[scope=row]{padding:10px 4px 10px 8px;font-size:12.5px}
+}
 
 </style>
 
@@ -448,8 +463,8 @@ details.ai-more[open] > summary{margin-bottom:14px}
 <header class="band">
   <div class="wrap">
     <div class="topline">
-      <span class="eyebrow">Revisamos cómo los encuentran en Google Maps y en ChatGPT</span>
-      <span class="pill">Preparado para el dueño</span>
+      <span class="eyebrow">Revisamos cómo encuentran su negocio en Google Maps y en ChatGPT</span>
+      <span class="pill">Preparado para ustedes</span>
     </div>
     <h1 class="patient">Hospital Veterinario Montejo</h1>
     <dl class="meta">
@@ -521,12 +536,12 @@ details.ai-more[open] > summary{margin-bottom:14px}
         <span class="v num">29<small> / 100</small></span>
         <div class="stack" role="img" aria-label="Google Maps 9 de 40, inteligencia artificial 15 de 30, ficha 5 de 30">
           <span style="width:9%;background:var(--seg-maps)"></span>
-          <span style="width:15%;background:var(--accent)"></span>
+          <span style="width:15%;background:var(--accent-on-band)"></span>
           <span style="width:5%;background:var(--band-muted)"></span>
         </div>
         <div class="legend">
           <div><span><i style="background:var(--seg-maps)"></i>Google Maps</span><span class="num">9 / 40</span></div>
-          <div><span><i style="background:var(--accent)"></i>Asistentes de IA</span><span class="num">15 / 30</span></div>
+          <div><span><i style="background:var(--accent-on-band)"></i>Asistentes de IA</span><span class="num">15 / 30</span></div>
           <div><span><i style="background:var(--band-muted)"></i>Ficha de Google</span><span class="num">5 / 30</span></div>
         </div>
         <span class="d">Calificación de 0 a 100 con lo que medimos en Google Maps, en las IA y en su ficha. <a href="#como-medimos">Cómo se calcula</a></span>
@@ -1001,7 +1016,7 @@ details.ai-more[open] > summary{margin-bottom:14px}
       <h4>El índice de 100 puntos</h4>
       <ul>
         <li>Google Maps, 40: por cada búsqueda, 10 si sale del 1 al 3, 6 del 4 al 7 y 3 del 8 al 10.</li>
-        <li>IA, 30: 5 por cada respuesta que los nombra.</li>
+        <li>IA, 30: 5 por cada respuesta que menciona al negocio.</li>
         <li>Ficha, 30: 5 por cada punto (reclamada, web propia, sin duplicados, 50+ fotos, responde reseñas, 4.5+ con 100+ reseñas).</li>
       </ul>
     </div>
@@ -1019,6 +1034,7 @@ details.ai-more[open] > summary{margin-bottom:14px}
 window.CALC={price:2900,us:'visita',up:'visitas',vs:'visita',vp:'visitas'};
 (function(){
   var C=window.CALC||{price:2900,us:'visita',up:'visitas',vs:'visita',vp:'visitas'};
+  var CS=C.cs||'cliente nuevo', CP=C.cp||'clientes nuevos', EACH=C.each||'cada uno';
   var fmt=function(n){return '$'+Math.round(n).toLocaleString('es-MX');};
   var pl=function(n,s,p){return n+' '+(n===1?s:p);};
   var a=document.getElementById('f-new'),t=document.getElementById('f-ticket'),v=document.getElementById('f-visits');
@@ -1031,9 +1047,9 @@ window.CALC={price:2900,us:'visita',up:'visitas',vs:'visita',vp:'visitas'};
     var m=0,acc=0;
     while(acc<C.price && m<36){ m++; acc+=A*T + A*(m-1)*T*(V-1)/12; }
     o('o-new',A);o('o-ticket',fmt(T));o('o-visits',V);o('r-year',fmt(year));
-    o('r-detail',pl(A*12,'cliente nuevo','clientes nuevos')+' en el año · '+pl(V,C.vs,C.vp)+' al año cada uno · '+fmt(T));
+    o('r-detail',pl(A*12,CS,CP)+' en el año · '+pl(V,C.vs,C.vp)+' al año '+EACH+' · '+fmt(T));
     var p=document.getElementById('r-be');
-    p.textContent='El arranque cuesta '+fmt(C.price)+' + IVA. Con '+pl(A,'cliente nuevo','clientes nuevos')+' al mes, las ventas extra lo cubren en ';
+    p.textContent='El arranque cuesta '+fmt(C.price)+' + IVA. Con '+pl(A,CS,CP)+' al mes, las ventas extra lo cubren en ';
     var b=document.createElement('b');b.textContent=(m>=36?'más de 3 años':'unos '+pl(m,'mes','meses'));p.appendChild(b);
     p.appendChild(document.createTextNode('.'));
   }
